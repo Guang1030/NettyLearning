@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by guang on 2019/3/30.
  */
-public class PacketClientHandler extends SimpleChannelInboundHandler {
+public class PacketClientHandler extends SimpleChannelInboundHandler<String> {
     private int counter = 0;
     private static final Logger logger = LoggerFactory.getLogger(PacketClientHandler.class);
 
@@ -27,13 +27,10 @@ public class PacketClientHandler extends SimpleChannelInboundHandler {
         super.channelActive(ctx);
     }
 
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
-        byte[] req = new byte[buf.readableBytes()];
-        buf.readBytes(req);
-        String body = new String(req, "utf-8");
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         counter++;
-        logger.info("Server response is " + body + "; counter is " + counter);
+        logger.info("Server response is " + msg + "; counter is " + counter);
     }
 }

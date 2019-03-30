@@ -11,6 +11,7 @@
     <modules>
         <module>hello-netty</module>
         <module>not-process-tcp-packet</module>
+        <module>process-tcp-packet</module>
     </modules>
 
     <properties>
